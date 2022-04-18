@@ -1,4 +1,4 @@
-const searchMeal = () => {
+const searchMeal = async () => {
   const searchField = document.getElementById("meal-search");
   const searchValue = searchField.value;
 
@@ -17,9 +17,9 @@ const searchMeal = () => {
   } else {
     // Search Meal
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => displaySearchResult(data.meals));
+    const response = await fetch(url);
+    const data = await response.json();
+    displaySearchResult(data.meals);
   }
 };
 
@@ -59,11 +59,11 @@ const displaySearchResult = (meals) => {
   }
 };
 
-const leadMealDetails = (mealID) => {
+const leadMealDetails = async (mealID) => {
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => displayMealDetails(data.meals[0]));
+  const response = await fetch(url);
+  const data = await response.json();
+  displayMealDetails(data.meals[0]);
 };
 
 const displayMealDetails = (meal) => {
