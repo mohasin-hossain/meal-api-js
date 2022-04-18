@@ -11,12 +11,9 @@ const searchMeal = () => {
     error.textContent = "";
 
     // Showing error
-    const p = document.createElement("p");
-    p.classList.add("text-center");
-    p.classList.add("text-danger");
-    p.classList.add('fw-bold');
-    p.innerText = "Please write any meal name!";
-    error.appendChild(p);
+    error.innerHTML = `
+      <p class="text-center text-danger fw-bold"> Please write any meal name!</p>
+    `;
   } else {
     // Search Meal
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
@@ -31,6 +28,8 @@ const displaySearchResult = (meals) => {
 
   // Clearing previous result
   searchResult.textContent = "";
+  const error = document.getElementById("error");
+  error.textContent = "";
 
   if (meals == null) {
     const error = document.getElementById("error");
@@ -38,12 +37,9 @@ const displaySearchResult = (meals) => {
     error.textContent = "";
 
     // Showing error
-    const p = document.createElement("p");
-    p.classList.add("text-center");
-    p.classList.add("text-danger");
-    p.classList.add('fw-bold');
-    p.innerText = "No meal found! Please try another food name.";
-    error.appendChild(p);
+    error.innerHTML = `
+    <p class="text-center text-danger fw-bold"> No meal found! Please try another food name.</p>
+  `;
   } else {
     // Looping through meals
     meals.forEach((meal) => {
