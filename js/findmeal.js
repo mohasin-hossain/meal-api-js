@@ -7,20 +7,29 @@ const searchMeal = () => {
   // Clear Input Field
   searchField.value = "";
 
-  // Search Meal
-  const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => displaySearchResult(data.meals));
+  if (searchValue == "") {
+    const error = document.getElementById("error");
+    const p = document.createElement("p");
+    p.classList.add("text-center");
+    p.classList.add("text-danger");
+    p.innerText = "Please write any food name!";
+    error.appendChild(p);
+  } else {
+    // Search Meal
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => displaySearchResult(data.meals));
+  }
 };
 
 const displaySearchResult = (meals) => {
   const searchResult = document.getElementById("search-result");
-    
-  // Clearing previous result   
+
+  // Clearing previous result
   searchResult.innerHTML = "";
 
- // Looping through meals
+  // Looping through meals
   meals.forEach((meal) => {
     const div = document.createElement("div");
     div.classList.add("col");
