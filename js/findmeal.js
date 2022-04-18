@@ -7,10 +7,15 @@ const searchMeal = () => {
 
   if (searchValue == "") {
     const error = document.getElementById("error");
+    // Clearing previous error message
+    error.textContent = "";
+
+    // Showing error
     const p = document.createElement("p");
     p.classList.add("text-center");
     p.classList.add("text-danger");
-    p.innerText = "Please write any food name!";
+    p.classList.add('fw-bold');
+    p.innerText = "Please write any meal name!";
     error.appendChild(p);
   } else {
     // Search Meal
@@ -27,24 +32,35 @@ const displaySearchResult = (meals) => {
   // Clearing previous result
   searchResult.textContent = "";
 
+  if (meals == null) {
+    const error = document.getElementById("error");
+    // Clearing previous error message
+    error.textContent = "";
 
-  // Looping through meals
-  meals.forEach((meal) => {
-    const div = document.createElement("div");
-    div.classList.add("col");
-    div.innerHTML = `
-        <div onclick="leadMealDetails('${meal.idMeal}')" class="card">
-            <img src="${
-              meal.strMealThumb
-            }" class="card-img-top" alt="Meal item">
-            <div class="card-body">
-                <h5 class="card-title">${meal.strMeal}</h5>
-                <p class="card-text">${meal.strInstructions.slice(0, 200)}</p>
-            </div>
-        </div>
-        `;
-    searchResult.appendChild(div);
-  });
+    // Showing error
+    const p = document.createElement("p");
+    p.classList.add("text-center");
+    p.classList.add("text-danger");
+    p.classList.add('fw-bold');
+    p.innerText = "No meal found! Please try another food name.";
+    error.appendChild(p);
+  } else {
+    // Looping through meals
+    meals.forEach((meal) => {
+      const div = document.createElement("div");
+      div.classList.add("col");
+      div.innerHTML = `
+      <div onclick="leadMealDetails('${meal.idMeal}')" class="card">
+          <img src="${meal.strMealThumb}" class="card-img-top" alt="Meal item">
+          <div class="card-body">
+              <h5 class="card-title">${meal.strMeal}</h5>
+              <p class="card-text">${meal.strInstructions.slice(0, 200)}</p>
+          </div>
+      </div>
+      `;
+      searchResult.appendChild(div);
+    });
+  }
 };
 
 const leadMealDetails = (mealID) => {
@@ -58,7 +74,7 @@ const displayMealDetails = (meal) => {
   const mealDetails = document.getElementById("meal-details");
 
   // Clearing previous meal details
-  mealDetails.textContent = '';
+  mealDetails.textContent = "";
 
   const div = document.createElement("div");
   div.classList.add("card");
