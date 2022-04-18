@@ -1,5 +1,3 @@
-// https://www.themealdb.com/api.php
-
 const searchMeal = () => {
   const searchField = document.getElementById("meal-search");
   const searchValue = searchField.value;
@@ -27,7 +25,8 @@ const displaySearchResult = (meals) => {
   const searchResult = document.getElementById("search-result");
 
   // Clearing previous result
-  searchResult.innerHTML = "";
+  searchResult.textContent = "";
+
 
   // Looping through meals
   meals.forEach((meal) => {
@@ -57,11 +56,15 @@ const leadMealDetails = (mealID) => {
 
 const displayMealDetails = (meal) => {
   const mealDetails = document.getElementById("meal-details");
+
+  // Clearing previous meal details
+  mealDetails.textContent = '';
+
   const div = document.createElement("div");
   div.classList.add("card");
   div.innerHTML = `
     <div class="card-body p-2">
-        <h5 class="card-title text-center display-1">${meal.strMeal}</h5>
+        <h5 class="card-title text-center display-3">${meal.strMeal}</h5>
         <img src="${meal.strMealThumb}" class="card-img-top mb-3" alt="Meal item">
         <p class="card-text p-2">${meal.strInstructions}</p>
         <a href="${meal.strYoutube}" class="btn btn-danger btn-lg">Watch on Youtube</a>
