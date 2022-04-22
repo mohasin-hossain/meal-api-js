@@ -5,6 +5,9 @@ const searchMeal = async () => {
   // Clear Input Field
   searchField.value = "";
 
+  // Show spinner
+  toggleSpinner("block");
+
   if (searchValue == "") {
     const error = document.getElementById("error");
     // Clearing previous error message
@@ -23,6 +26,10 @@ const searchMeal = async () => {
   }
 };
 
+const toggleSpinner = (displayStyle) => {
+  document.getElementById("spinner").style.display = displayStyle;
+};
+
 const displaySearchResult = (meals) => {
   const searchResult = document.getElementById("search-result");
 
@@ -30,6 +37,9 @@ const displaySearchResult = (meals) => {
   searchResult.textContent = "";
   const error = document.getElementById("error");
   error.textContent = "";
+  const mealDetails = document.getElementById("meal-details");
+  // Clearing previous meal details
+  mealDetails.textContent = "";
 
   if (meals == null) {
     const error = document.getElementById("error");
@@ -40,6 +50,8 @@ const displaySearchResult = (meals) => {
     error.innerHTML = `
     <p class="text-center text-danger fw-bold"> No meal found! Please try another food name.</p>
   `;
+    // Hide spinner
+    toggleSpinner("none");
   } else {
     // Looping through meals
     meals.forEach((meal) => {
@@ -56,6 +68,8 @@ const displaySearchResult = (meals) => {
       `;
       searchResult.appendChild(div);
     });
+    // Hide spinner
+    toggleSpinner("none");
   }
 };
 
