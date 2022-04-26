@@ -1,3 +1,13 @@
+// Search on keyboard Enter
+const inputField = document.getElementById("meal-search");
+const searchBtn = document.getElementById("search-btn");
+inputField.addEventListener("keypress", function(event) {
+    if (event.key == 'Enter') {
+        searchBtn.click();
+    }
+});
+
+// Search Meal
 const searchMeal = async () => {
   const searchField = document.getElementById("meal-search");
   const searchValue = searchField.value;
